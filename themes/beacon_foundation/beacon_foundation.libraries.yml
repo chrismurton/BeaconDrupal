@@ -2,6 +2,6 @@ global:
   version: VERSION
   css:
     base:
-      css/STARTER.css: {}
+      css/beacon_foundation.css: {}
   js:
-    js/STARTER.js: {}
+    js/beacon_foundation.js: {}

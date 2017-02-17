@@ -7,10 +7,10 @@ base theme: zurb_foundation
 # Image appears on admin/appearance
 # screenshot: images/screenshot.jpg
 
-# Uncomment these lines and change "STARTER" to your theme name if you
+# Uncomment these lines and change "beacon_foundation" to your theme name if you
 # need to add custom CSS or JS
 libraries:
- - STARTER/global
+ - beacon_foundation/global
 
 # Regions are output in the page.html.twig
 
