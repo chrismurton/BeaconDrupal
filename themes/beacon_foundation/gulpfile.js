@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var connect = require('gulp-connect');
+var sourcemaps = require('gulp-sourcemaps');
 var $    = require('gulp-load-plugins')();
 
 var sassPaths = [
@@ -8,6 +10,7 @@ var sassPaths = [
 
 gulp.task('sass', function() {
   return gulp.src('scss/beacon_foundation.scss')
+    .pipe(sourcemaps.init())
     .pipe($.sass({
       includePaths: sassPaths
     })
@@ -15,9 +18,20 @@ gulp.task('sass', function() {
     .pipe($.autoprefixer({
       browsers: ['last 2 versions', 'ie >= 9']
     }))
-    .pipe(gulp.dest('css'));
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('css'))
+     .pipe(connect.reload());;
 });
 
-gulp.task('default', ['sass'], function() {
-  gulp.watch(['scss/**/*.scss'], ['sass']);
+gulp.task('connect', function() {
+    connect.server({
+        livereload: true
+    });
 });
+
+gulp.task('watchFiles', function(){
+  gulp.watch('scss/**/*.scss', ['sass']);
+  gulp.watch(['css/beacon_foundation.css', 'beacon_foundation/templates/**/*.twig', '*.html'])
+});
+
+gulp.task('default', ['watchFiles', 'connect']);
